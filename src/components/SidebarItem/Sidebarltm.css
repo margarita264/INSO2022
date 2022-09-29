@@ -1,0 +1,7 @@
+.button{
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration:none;
+    padding: 4px   
+}
