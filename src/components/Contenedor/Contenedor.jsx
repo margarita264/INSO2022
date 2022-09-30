@@ -1,7 +1,7 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Sidebar, ListSidebar } from "../../components/Sidebar/index";
+import { Sidebar} from "../../components/Sidebar/index";
 import Rout from "../Routes/Rout";
 import "./Contenedor.css";
 

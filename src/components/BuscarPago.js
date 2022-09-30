@@ -50,13 +50,15 @@ export const BuscarPago = ({createData, updateData, dataToEdit, setDataToEdit}) 
     <div>
       <h3>{dataToEdit ? "Buscar pago por Código" : "Buscar pago por Código"}</h3>
       <form onSubmit={handleSubmit}>
-        <input
+        <input size="40" 
           type="text"
           name="name"
           placeholder="Ingrese código de pago por favor"
           onChange={handleChange}
           value={form.name}
         />
+        <h1></h1>
+        <h1></h1>
         <input className="buscar" type="submit" value="Buscar" />
         <input className="buscar" type="reset" value="Limpiar" onClick={handleReset} />
       </form>

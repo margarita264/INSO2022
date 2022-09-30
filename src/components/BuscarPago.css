@@ -37,3 +37,23 @@ input[type="reset"] {
   align-items: center;
   justify-content: center;
 }
+
+table {
+  text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 5px;
+}
+
+thead {
+  background-color: #05595b;
+  color: white;
+}
+
+button {
+  width: 60px;
+}

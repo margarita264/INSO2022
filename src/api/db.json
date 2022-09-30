@@ -1,0 +1,31 @@
+{
+  "pagos": [
+    {
+      "id": 1,
+      "cliente": "Zerpa Micaela",
+      "codigo": "0001",
+      "monto": "3000",
+      "tipo": "efectivo",
+      "estado": "pendiente",
+      "vencimiento": "20/09/2020"
+    },
+    {
+      "id": 2,
+      "cliente": "Valeriano Brian",
+      "codigo": "0002",
+      "monto": "3500",
+      "tipo": "efectivo",
+      "estado": "pendiente",
+      "vencimiento": "20/09/2020"
+    },
+    {
+      "id": 3,
+      "cliente": "Zerpa Margarita",
+      "codigo": "0003",
+      "monto": "2500",
+      "tipo": "efectivo",
+      "estado": "pendiente",
+      "vencimiento": "25/09/2020"
+    }
+  ]
+}

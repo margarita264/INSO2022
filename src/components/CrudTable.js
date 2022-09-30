@@ -1,6 +1,6 @@
 import React from "react";
 import CrudTableRow from "./CrudTableRow";
-import "./BuscarPago.css"
+import "./BuscarPago.css";
 
 const CrudTable = ({ data, setDataToEdit, deleteData }) => {
   return (
