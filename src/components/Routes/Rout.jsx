@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Asistencia from "../../Pages/Asistencia";
 import Calendario from "../../Pages/Calendario";
-import Estadisticas from "../../Pages/Asistencia";
+import Estadisticas from "../../Pages/Estadisticas";
 import Home from "../../Pages/Home";
 import Pagos from "../../Pages/Pagos";
 import Registrar from "../../Pages/Registrar";

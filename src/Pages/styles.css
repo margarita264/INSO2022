@@ -28,8 +28,7 @@ li {
   width: 120rem;
   margin: 0 auto;
 }
-.header {
-}
+
 .contenido {
   background-color: #05595b;
   display: flex;
@@ -61,20 +60,16 @@ footer {
   flex-grow: 0;
 }
 .boton {
-  padding: 2rem;
-  color: white;
+  justify-content:center;
+  color: black;
+  text-decoration: none;
+  padding: 4px;
+  width: 100%;
+  border: 2px solid black;
 }
 .boton:hover {
   box-shadow: -1px -1px 5px 3px white;
 }
-
-.deudor {
-  background-color: red;
-}
-.no-deudor {
-  background-color: rgb(88, 192, 88);
-}
-
 .footer-flex {
   display: flex;
   justify-content: space-around;
@@ -84,17 +79,34 @@ footer {
 
 .tarjeta {
   background-color: #e2d785;
-  grid-template-columns: 30% 70%;
-  width: 60%;
+  width: 80%;
   margin: auto;
   padding: 2rem;
   line-height: 2;
 }
-.tarjeta div {
-}
+
 .tarjeta button {
   grid-column-start: 1;
   grid-column-end: 3;
+}
+
+.boton-deuda {
+  border: black;
+  color: blanco;
+  padding: 9px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  width: 100%;
+}
+.foto {
+  float: left;
+  padding: 9px 22px;
+}
+.datos {
+  float: left;
+  padding: 9px 22px;
 }
 
 .table {

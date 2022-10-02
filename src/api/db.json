@@ -41,7 +41,7 @@
       "apellido": "Sand",
       "actividad": "Cardio",
       "img": "https://randomuser.me/api/portraits/med/men/2.jpg",
-      "estado_pago": "pagado",
+      "estado_pago": "pendiente",
       "monto": 1500,
       "id": 456
     },
@@ -100,6 +100,40 @@
       "actividad": "Cardio",
       "fecha": "2/10/2022, 11:44:15",
       "id": 1664721857114
+    },
+    {
+      "nombre": "Pepe",
+      "actividad": "Cardio",
+      "fecha": "2/10/2022, 17:35:20",
+      "id": 1664742924621
+    },
+    {
+      "nombre": "Pepe",
+      "actividad": "Cardio",
+      "fecha": "2/10/2022, 17:35:20",
+      "id": 1664742932602
+    },
+    {
+      "nombre": "Pepe",
+      "actividad": "Cardio",
+      "fecha": "2/10/2022, 17:38:22",
+      "id": 1664743104686
+    },
+    {
+      "fecha": "2/10/2022, 17:39:39",
+      "id": 1664743183506
+    },
+    {
+      "nombre": "Carlos",
+      "actividad": "GIM",
+      "fecha": "2/10/2022, 17:45:27",
+      "id": 1664743532665
+    },
+    {
+      "nombre": "Carlos",
+      "actividad": "GIM",
+      "fecha": "2/10/2022, 17:51:10",
+      "id": 1664743875739
     }
   ]
 }
