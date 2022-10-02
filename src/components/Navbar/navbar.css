@@ -119,3 +119,8 @@
     transform: rotate(-45deg) translate(26px, 26px);
   }
 }
+
+.Navbar img{
+  width:300px;
+  height:100px;
+}

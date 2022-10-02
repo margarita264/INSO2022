@@ -22,7 +22,7 @@ export const helpHttp = () => {
 
     // console.log(options);
 
-    setTimeout(() => controller.abort, 3000); // tiempo de espera para abortar petición
+    setTimeout(() => controller.abort, 6000); // tiempo de espera para abortar petición
 
     return fetch(endpoint, options) //objeto que rechaza la promesa en caso
       .then(

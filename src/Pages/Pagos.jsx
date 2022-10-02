@@ -97,7 +97,25 @@ const Pagos = () => {
     }
   };
 
-  const getPago = (id) => {};
+  const getPago = (id) => {
+    let endpoint = `${url}/${id}`;
+      let options = {
+        headers: { "content-type": "application/json" },
+      };
+
+      api.get(endpoint, options).then((res) => {
+        console.log(res);
+        if (!res.err) {
+          let newData = db.filter((el) => el.id !== id);
+          //console.log(newData);
+          //setDb(newData);
+        } else {
+          setError(res);
+        }
+      });
+  };
+
+  
 
   return (
     <div>
@@ -109,6 +127,7 @@ const Pagos = () => {
             updateData={updateData}
             dataToEdit={dataToEdit}
             setDataToEdit={setDataToEdit}
+            getPago={getPago}
           />
         </Col>
         <Col sm={8}>
@@ -123,7 +142,7 @@ const Pagos = () => {
             <CrudTable
               data={db}
               setDataToEdit={setDataToEdit}
-              deleteData={deleteData}
+              deleteData={getPago}
             />
           )}
         </Col>

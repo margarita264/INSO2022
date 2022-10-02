@@ -1,12 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './navbar.css'
+import Logo from '../../assets/logo.JPG'
 
 export const Navbar = () => {
   
   return (
     <div className="Navbar">
-      <span className="nav-logo">EXTREME FITNESS</span>      
+      <img src={Logo} alt="logo"/>     
     </div>
   );
 };

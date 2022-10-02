@@ -9,14 +9,16 @@ export const footer = () => {
         <div className="row">
           {/* Column1 */}
           <div className="col">
-            <h4>Contactos</h4>
-            <li>342-420-6969</li>
-            <li>Moscow, Russia</li>
-            <li>123 Streeet South North</li>
+            <h3>Infomacion</h3>
+            <ul>
+              <li>GYM Extreme Fitness</li>
+              <li>Direccion: Av. Rio de la Plata 83, 4612 Palpala, Jujuy</li>
+              <li>Telefono: 03885072611</li>
+            </ul>
           </div>
           {/* Column2 */}
           <div className="col">
-            <h4>Actividades</h4>
+            <h3>Actividades</h3>
             <ul>
               <li>Factor F</li>
               <li>Gym Adultos</li>
@@ -28,7 +30,7 @@ export const footer = () => {
           </div>
           {/* Column3 */}
           <div className="col">
-            <h4>Entrenadores</h4>
+            <h3>Entrenadores</h3>
             <ul>
               <li>Ariel</li>
               <li>Sil</li>

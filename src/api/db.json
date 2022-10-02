@@ -27,5 +27,79 @@
       "estado": "pendiente",
       "vencimiento": "25/09/2020"
     }
+  ],
+  "clientes": [
+    {
+      "nombre": "Carlos",
+      "actividad": "GIM",
+      "img": "https://randomuser.me/api/portraits/med/men/1.jpg",
+      "estado_pago": "pagado",
+      "id": 123
+    },
+    {
+      "nombre": "Pepe",
+      "apellido": "Sand",
+      "actividad": "Cardio",
+      "img": "https://randomuser.me/api/portraits/med/men/2.jpg",
+      "estado_pago": "pagado",
+      "monto": 1500,
+      "id": 456
+    },
+    {
+      "nombre": "Margarita",
+      "apellido": "Zerpa",
+      "actividad": "GIM",
+      "img": "https://randomuser.me/api/portraits/med/men/3.jpg",
+      "estado_pago": "pagado",
+      "monto": 0,
+      "id": 321
+    },
+    {
+      "nombre": "Micalea",
+      "apellido": "Zerpa",
+      "actividad": "GIM",
+      "img": "https://randomuser.me/api/portraits/med/men/4.jpg",
+      "estado_pago": "pendiente",
+      "monto": 2000,
+      "id": 654
+    },
+    {
+      "nombre": "Jonh",
+      "apellido": "McMillan",
+      "actividad": "GIM",
+      "img": "https://randomuser.me/api/portraits/med/men/5.jpg",
+      "estado_pago": "pagado",
+      "monto": 0,
+      "id": 789
+    }
+  ],
+  "historial": [
+    {
+      "nombre": "Carlos Alvarado",
+      "actividad": "GIM",
+      "fecha": "18/09/2022, 02:06:00",
+      "id": 1
+    },
+    {
+      "nombre": "Pepe Sand",
+      "actividad": "Cardio",
+      "fecha": "18/09/2022, 02:07:00",
+      "id": 2
+    },
+    {
+      "nombre": "Pepe",
+      "apellido": "Sand",
+      "actividad": "Cardio",
+      "img": "https://randomuser.me/api/portraits/med/men/2.jpg",
+      "estado_pago": "pagado",
+      "monto": 1500,
+      "id": 1664721730909
+    },
+    {
+      "nombre": "Pepe",
+      "actividad": "Cardio",
+      "fecha": "2/10/2022, 11:44:15",
+      "id": 1664721857114
+    }
   ]
 }
