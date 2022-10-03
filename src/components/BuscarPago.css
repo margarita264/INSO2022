@@ -32,6 +32,8 @@ input[type="reset"] {
   font-style: italic;
   font-weight: normal;
   font-family: "Helvetica", "Verdana", "Monaco", sans-serif;
+  font-size:120%;
+
 }
 #columna {
   align-items: center;

@@ -53,7 +53,7 @@ const Pagos = () => {
 
   const deleteData = (id) => {
     let isDelete = window.confirm(
-      `¿Estás seguro de eliminar el registro con el id 0004?`
+      `¿Esta seguro que desea cancelar el pago seleccionado?`
     );
 
     if (isDelete) {

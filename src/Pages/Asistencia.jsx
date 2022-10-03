@@ -106,8 +106,10 @@ export const Asistencia = () => {
       setCuota("Registrar Pago");
       setColorButon("red");
       setRuta("/pagos");
+    }else{
+      setCuota("Cuota al dia");
     }
-  }, [cliente]);
+  }, [cliente,cuota]);
 
   //guardar historial de asistencias
   const handleSubmit = (cliente) => {
@@ -118,7 +120,6 @@ export const Asistencia = () => {
     setdiplayQR("block");
   };
   const Submit = () => {
-    console.log('HOLA');
     setIsRecording(true)
   };
   return (
@@ -126,7 +127,7 @@ export const Asistencia = () => {
       <Row>
         <Col sm={6} class="text-center">
           <div className="reader" style={{ display: diplayQR}}>
-            <button onClick={() => Submit()}>Start Scanning</button>
+            <button onClick={() => Submit()}style={{ width:85, height:30}}>Start Scanning</button>
             <QrReader
               className="camara"
               facingMode={selected}
@@ -138,7 +139,6 @@ export const Asistencia = () => {
                   console.info(error);
                 }
               }}
-              showViewFinder={false}
             />
             
           </div>
@@ -169,7 +169,7 @@ export const Asistencia = () => {
            
           </div>
         </Col>
-        <Col sm={4}>
+        <Col sm={5}>
           {loading && <Loader />}
           {error && (
             <Message

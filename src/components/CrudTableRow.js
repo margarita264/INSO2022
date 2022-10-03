@@ -93,7 +93,7 @@ const CrudTableRow = ({ el, setDataToEdit, deleteData }) => {
       }
     });
     //getClienteP(id);
-    //deleteData(id);
+    deleteData(id);
   }
  const handleChange = ()=>{}
   return (
