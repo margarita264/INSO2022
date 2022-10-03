@@ -6,12 +6,16 @@ import BuscarPago from "../components/BuscarPago";
 import CrudTable from "../components/CrudTable";
 import Loader from "../components/loader/Loader";
 import Message from "../components/loader/Messaje";
+import CrudTableRow from "../components/CrudTableRow";
 
 const Pagos = () => {
   const [db, setDb] = useState(null);
   const [dataToEdit, setDataToEdit] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pagoId, setPagoId] = useState({});
+  const [diplayPagos, setDiplayPagos] = useState("block");
+  const [diplayBusqueda, setDiplayBusqueda] = useState("none");
 
   let api = helpHttp();
   let url = "http://localhost:5000/pagos";
@@ -21,7 +25,6 @@ const Pagos = () => {
     helpHttp()
       .get(url)
       .then((res) => {
-        //console.log(res);
         if (!res.err) {
           setDb(res);
           setError(null);
@@ -35,15 +38,12 @@ const Pagos = () => {
 
   const createData = (data) => {
     data.id = Date.now();
-    //console.log(data);
-
     let options = {
       body: data,
       headers: { "content-type": "application/json" },
     };
 
     api.post(url, options).then((res) => {
-      //console.log(res);
       if (!res.err) {
         setDb([...db, res]); //actualiza la bd
       } else {
@@ -54,15 +54,11 @@ const Pagos = () => {
 
   const updateData = (data) => {
     let endpoint = `${url}/${data.id}`;
-    //console.log(endpoint);
-
     let options = {
       body: data,
       headers: { "content-type": "application/json" },
     };
-
     api.put(endpoint, options).then((res) => {
-      //console.log(res);
       if (!res.err) {
         let newData = db.map((el) => (el.id === data.id ? data : el));
         setDb(newData);
@@ -84,7 +80,6 @@ const Pagos = () => {
       };
 
       api.del(endpoint, options).then((res) => {
-        //console.log(res);
         if (!res.err) {
           let newData = db.filter((el) => el.id !== id);
           setDb(newData);
@@ -97,29 +92,35 @@ const Pagos = () => {
     }
   };
 
-  const getPago = (id) => {
-    let endpoint = `${url}/${id}`;
-      let options = {
-        headers: { "content-type": "application/json" },
-      };
+  // useEffect(() => {
+  //   let endpoint = `${url}/${pagoId}`;
+  //   let options = {
+  //     headers: { "content-type": "application/json" },
+  //   };
+  //   api.get(endpoint, options).then((res) => {
+  //     if (!res.err) {
+  //       setPago(res);
+  //     } else {
+  //       setError(res);
+  //     }
+  //   });
 
-      api.get(endpoint, options).then((res) => {
-        console.log(res);
-        if (!res.err) {
-          let newData = db.filter((el) => el.id !== id);
-          //console.log(newData);
-          //setDb(newData);
-        } else {
-          setError(res);
-        }
-      });
+  // }, [pagoId]);
+
+  const getPago = (codigo) => {
+    db.map((el) => {
+      if (el.codigo == codigo) {
+        setPagoId(el);
+      }
+    });
   };
 
-  
+  useEffect(() => {
+    console.log(pagoId);
+  }, [pagoId]);
 
   return (
     <div>
-      <h1></h1>
       <Row>
         <Col sm={4}>
           <BuscarPago
@@ -128,6 +129,8 @@ const Pagos = () => {
             dataToEdit={dataToEdit}
             setDataToEdit={setDataToEdit}
             getPago={getPago}
+            setDiplayPagos={setDiplayPagos}
+            setDiplayBusqueda={setDiplayBusqueda}
           />
         </Col>
         <Col sm={8}>
@@ -139,12 +142,37 @@ const Pagos = () => {
             />
           )}
           {db && (
-            <CrudTable
-              data={db}
-              setDataToEdit={setDataToEdit}
-              deleteData={getPago}
-            />
+            <div style={{ display: diplayPagos }}>
+              <CrudTable
+                data={db}
+                setDataToEdit={setDataToEdit}
+                deleteData={deleteData}
+              />
+            </div>
           )}
+          <div style={{ display: diplayBusqueda }}>
+            <h3>Pagos Pendientes</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th className="encabezado">Cliente</th>
+                  <th className="encabezado">Codigo</th>
+                  <th className="encabezado">monto</th>
+                  <th className="encabezado">tipo</th>
+                  <th className="encabezado">Estado</th>
+                  <th className="encabezado">Vencimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <CrudTableRow
+                  key={pagoId.id}
+                  el={pagoId}
+                  setDataToEdit={setDataToEdit}
+                  deleteData={deleteData}
+                />
+              </tbody>
+            </table>
+          </div>
         </Col>
       </Row>
     </div>

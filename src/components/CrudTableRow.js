@@ -3,7 +3,10 @@ import "./BuscarPago.css"
 
 const CrudTableRow = ({ el, setDataToEdit, deleteData }) => {
   let { cliente,codigo,monto,tipo,estado,vencimiento, id } = el;
-
+  function todos(id){
+    deleteData(id);
+    //funcion2();
+}
   return (
     <tr>
       <th className="item">{cliente}</th>
@@ -14,7 +17,7 @@ const CrudTableRow = ({ el, setDataToEdit, deleteData }) => {
       <th className="item">{vencimiento}</th>
       <td>
         <button className="editar" onClick={() => setDataToEdit(el)}>Editar</button>
-        <button className="pagar" onClick={() => deleteData(id)}>Pagar</button>
+        <button className="pagar" onClick={() => todos(id)}>Pagar</button>
       </td>
     </tr>
   );

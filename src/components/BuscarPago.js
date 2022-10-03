@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./BuscarPago.css";
 
 const initailForm = {
-  name:"",
-  constellation: "",
-  id: null,
+  name: "",
 };
 
 export const BuscarPago = ({
@@ -13,9 +11,12 @@ export const BuscarPago = ({
   dataToEdit,
   setDataToEdit,
   getPago,
+  setDiplayPagos,
+  setDiplayBusqueda,
 }) => {
   const [form, setForm] = useState(initailForm);
   const [buscar, setBuscar] = useState(false);
+  const [pagoId, setPagoId] = useState({});
 
   useEffect(() => {
     if (dataToEdit) {
@@ -32,6 +33,23 @@ export const BuscarPago = ({
     });
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (!form.name) {
+  //     alert("No ingresó ningún código");
+  //     return;
+  //   }
+  //   console.log(form);
+  //   if (form.id === null) {
+  //     createData(form);
+  //   } else {
+  //     updateData(form);
+  //   }
+
+  //   handleReset();
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -39,19 +57,17 @@ export const BuscarPago = ({
       alert("No ingresó ningún código");
       return;
     }
-    console.log(form);
-    if (form.id === null) {
-      createData(form);
-    } else {
-      updateData(form);
-    }
-
-    handleReset();
+    console.log(form.name);
+    getPago(form.name);
+    setDiplayBusqueda("block");
+    setDiplayPagos("none")
   };
 
   const handleReset = (e) => {
     setForm(initailForm);
     setDataToEdit(null);
+    setDiplayBusqueda("none");
+    setDiplayPagos("block")
   };
   return (
     <div>
