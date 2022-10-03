@@ -104,7 +104,7 @@ const Pagos = () => {
 
   return (
     <div>
-      <Row>
+      <Row className="tablaPago" >
         <Col sm={4}>
           <BuscarPago
             createData={createData}

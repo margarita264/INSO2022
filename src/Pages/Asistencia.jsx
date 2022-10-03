@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { QrReader } from "react-qr-reader";
@@ -22,6 +22,11 @@ export const Asistencia = () => {
   const [cuota, setCuota] = useState("Cuota al dia");
   const [colorButon, setColorButon] = useState("#38E54D");
   const [ruta, setRuta] = useState("/asistencia");
+  const [selected, setSelected] = useState("environment");
+
+  //CONTROL CAMARA QR****************************************
+  const [isRecording, setIsRecording] = useState(false);
+  const ref = useRef(null);
 
   //rutas para consultar la base de datos
   let api = helpHttp();
@@ -112,14 +117,19 @@ export const Asistencia = () => {
     setDiplayTarjeta("none");
     setdiplayQR("block");
   };
+  const Submit = () => {
+    console.log('HOLA');
+    setIsRecording(true)
+  };
   return (
     <div>
-      <h1></h1>
       <Row>
-        <Col sm={7} class="text-center">
-          <div className="reader" style={{ display: diplayQR }}>
+        <Col sm={6} class="text-center">
+          <div className="reader" style={{ display: diplayQR}}>
+            <button onClick={() => Submit()}>Start Scanning</button>
             <QrReader
               className="camara"
+              facingMode={selected}
               onResult={(result, error) => {
                 if (!!result) {
                   setData(result?.text);
@@ -128,12 +138,13 @@ export const Asistencia = () => {
                   console.info(error);
                 }
               }}
-              style={{ width: "100%" }}
+              showViewFinder={false}
             />
-            <p>{data}</p>
+            
           </div>
+
           <div className="tarjeta" style={{ display: diplayTarjeta }}>
-            <div className="foto">
+            <div className="T2"> <div className="foto">
               <img
                 className="perfil"
                 src={img}
@@ -154,10 +165,11 @@ export const Asistencia = () => {
               onClick={() => handleSubmit(asistencia)}
             >
               {cuota}
-            </Link>
+            </Link></div>
+           
           </div>
         </Col>
-        <Col sm={5}>
+        <Col sm={4}>
           {loading && <Loader />}
           {error && (
             <Message

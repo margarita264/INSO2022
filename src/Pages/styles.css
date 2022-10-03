@@ -83,6 +83,9 @@ footer {
   margin: auto;
   padding: 2rem;
   line-height: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-5%, 50%);
 }
 
 .tarjeta button {
@@ -116,9 +119,19 @@ footer {
   font-size: 14px;
 }
 .reader {
-  box-sizing: content-box;
-  width: 400px;
-  height: 400px;
-  border: solid #5b6dcd 4px;
-  padding: 1px;
+  width: 500px;
+  height: 500px;
+  border: solid white 4px;
+  padding-top: 0px;
+  text-align: center;
+}
+
+.tablaPago{
+  padding-top: 25px;
+}
+.camara{
+  width: 450px;
+  margin: 0px auto;
+  
+  
 }

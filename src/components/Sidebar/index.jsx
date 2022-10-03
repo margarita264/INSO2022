@@ -15,7 +15,7 @@ import SidebarItem from "../SidebarItem";
 export const Sidebar = () => {
   return (
     <Container sidebar>
-      <Content>
+      <Content style={{paddingTop: 40}}>
         <SidebarItem Icon={FaHome} Text="Inicio" Route="/" />
         <SidebarItem Icon={FaUserAlt} Text="Registrar" Route="/registrar" />
         <SidebarItem
@@ -36,20 +36,5 @@ export const Sidebar = () => {
         />
       </Content>
     </Container>
-  );
-};
-
-export const ListSidebar = () => {
-  return (
-    <nav>
-      <ol>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/registrar">Registrar</Link>
-        </li>
-      </ol>
-    </nav>
   );
 };
