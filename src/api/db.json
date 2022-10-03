@@ -1,13 +1,31 @@
 {
   "pagos": [
     {
-      "id": 2,
+      "id": 456,
       "cliente": "Valeriano Brian",
       "codigo": "0002",
       "monto": "3500",
       "tipo": "efectivo",
       "estado": "pendiente",
       "vencimiento": "20/09/2020"
+    },
+    {
+      "id": 3,
+      "cliente": "Zerpa Margarita",
+      "codigo": "0003",
+      "monto": "2500",
+      "tipo": "efectivo",
+      "estado": "pendiente",
+      "vencimiento": "25/09/2020"
+    },
+    {
+      "id": 123,
+      "cliente": "Zerpa Micaela",
+      "codigo": "0004",
+      "monto": "4000",
+      "tipo": "efectivo",
+      "estado": "pendiente",
+      "vencimiento": "25/09/2020"
     }
   ],
   "clientes": [
@@ -19,17 +37,15 @@
       "id": 123
     },
     {
-      "nombre": "Pepe",
-      "apellido": "Sand",
-      "actividad": "Cardio",
+      "nombre": "Luis",
+      "actividad": "GIM",
       "img": "https://randomuser.me/api/portraits/med/men/2.jpg",
       "estado_pago": "pendiente",
-      "monto": 1500,
       "id": 456
     },
     {
-      "nombre": "Margarita",
-      "apellido": "Zerpa",
+      "nombre": "Pepe",
+      "apellido": "Sand",
       "actividad": "GIM",
       "img": "https://randomuser.me/api/portraits/med/men/3.jpg",
       "estado_pago": "pagado",
@@ -37,8 +53,8 @@
       "id": 321
     },
     {
-      "nombre": "Micalea",
-      "apellido": "Zerpa",
+      "nombre": "Max",
+      "apellido": "Steel",
       "actividad": "GIM",
       "img": "https://randomuser.me/api/portraits/med/men/4.jpg",
       "estado_pago": "pendiente",
@@ -50,7 +66,7 @@
       "apellido": "McMillan",
       "actividad": "GIM",
       "img": "https://randomuser.me/api/portraits/med/men/5.jpg",
-      "estado_pago": "pagado",
+      "estado_pago": "pendiente",
       "monto": 0,
       "id": 789
     }

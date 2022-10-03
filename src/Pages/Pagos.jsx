@@ -35,7 +35,6 @@ const Pagos = () => {
         setLoading(false);
       });
   }, [url]);
-
   const createData = (data) => {
     data.id = Date.now();
     let options = {
@@ -46,22 +45,6 @@ const Pagos = () => {
     api.post(url, options).then((res) => {
       if (!res.err) {
         setDb([...db, res]); //actualiza la bd
-      } else {
-        setError(res);
-      }
-    });
-  };
-
-  const updateData = (data) => {
-    let endpoint = `${url}/${data.id}`;
-    let options = {
-      body: data,
-      headers: { "content-type": "application/json" },
-    };
-    api.put(endpoint, options).then((res) => {
-      if (!res.err) {
-        let newData = db.map((el) => (el.id === data.id ? data : el));
-        setDb(newData);
       } else {
         setError(res);
       }
@@ -125,7 +108,6 @@ const Pagos = () => {
         <Col sm={4}>
           <BuscarPago
             createData={createData}
-            updateData={updateData}
             dataToEdit={dataToEdit}
             setDataToEdit={setDataToEdit}
             getPago={getPago}
