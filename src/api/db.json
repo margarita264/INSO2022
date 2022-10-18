@@ -1,49 +1,40 @@
 {
   "pagos": [
     {
-      "id": 123,
-      "cliente": "Carlos Alvarado",
-      "codigo": "0002",
-      "monto": "3500",
-      "tipo": "efectivo",
-      "estado": "pendiente",
-      "vencimiento": "20/10/2020"
-    },
-    {
       "id": 456,
       "cliente": "Luis",
       "codigo": "0003",
       "monto": "2500",
       "tipo": "efectivo",
       "estado": "pendiente",
-      "vencimiento": "5/10/2020"
+      "vencimiento": "5/10/2022"
     },
     {
       "id": 321,
-      "cliente": "Pepe Sand",
+      "cliente": "Miguel Nieva",
       "codigo": "0004",
       "monto": "4000",
       "tipo": "efectivo",
       "estado": "pendiente",
-      "vencimiento": "4/10/2020"
+      "vencimiento": "4/10/2022"
     },
     {
       "id": 654,
-      "cliente": "Max Steel",
+      "cliente": "Juan Steel",
       "codigo": "0005",
       "monto": "4000",
       "tipo": "efectivo",
       "estado": "pendiente",
-      "vencimiento": "4/10/2020"
+      "vencimiento": "4/10/2022"
     },
     {
       "id": 789,
-      "cliente": "Jonh McMillan",
+      "cliente": "Julian Millan",
       "codigo": "0006",
       "monto": "2030",
       "tipo": "efectivo",
       "estado": "pendiente",
-      "vencimiento": "8/10/2020"
+      "vencimiento": "8/10/2022"
     }
   ],
   "clientes": [
@@ -51,7 +42,7 @@
       "nombre": "Carlos Alvarado",
       "actividad": "GIM",
       "img": "https://randomuser.me/api/portraits/med/men/1.jpg",
-      "estado_pago": "pendiente",
+      "estado_pago": "pagado",
       "id": 123
     },
     {
@@ -90,20 +81,20 @@
     {
       "nombre": "Max Steel",
       "actividad": "GIM",
-      "fecha": "3/10/2022, 19:29:27",
-      "id": 1664836178460
+      "fecha": "3/10/2022, 22:11:18",
+      "id": 1664845896314
     },
     {
       "nombre": "Luis",
       "actividad": "GIM",
-      "fecha": "3/10/2022, 19:29:41",
-      "id": 1664836197407
+      "fecha": "3/10/2022, 22:11:58",
+      "id": 1664845932089
     },
     {
       "nombre": "Carlos Alvarado",
       "actividad": "GIM",
-      "fecha": "3/10/2022, 19:31:19",
-      "id": 1664836287767
+      "fecha": "3/10/2022, 22:14:19",
+      "id": 1664846073081
     }
   ]
 }
