@@ -10,6 +10,7 @@ import CrudTableRow from "../components/CrudTableRow";
 
 const Pagos = () => {
   const [db, setDb] = useState(null);
+  const [pagoModificado, setpagoModificado] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ const Pagos = () => {
   const [diplayBusqueda, setDiplayBusqueda] = useState("none");
 
   let api = helpHttp();
-  let url = "http://localhost:5000/pagos";
+  let url = "http://localhost:3001/api/pagos/pendientes";
 
   useEffect(() => {
     setLoading(true);
@@ -26,7 +27,8 @@ const Pagos = () => {
       .get(url)
       .then((res) => {
         if (!res.err) {
-          setDb(res);
+          setDb(res.listaPagos);
+          console.log(res.listaPagos);
           setError(null);
         } else {
           setDb(null);
@@ -34,7 +36,7 @@ const Pagos = () => {
         }
         setLoading(false);
       });
-  }, [url]);
+  }, [url, pagoModificado]);
   const createData = (data) => {
     data.id = Date.now();
     let options = {
@@ -75,21 +77,6 @@ const Pagos = () => {
     }
   };
 
-  // useEffect(() => {
-  //   let endpoint = `${url}/${pagoId}`;
-  //   let options = {
-  //     headers: { "content-type": "application/json" },
-  //   };
-  //   api.get(endpoint, options).then((res) => {
-  //     if (!res.err) {
-  //       setPago(res);
-  //     } else {
-  //       setError(res);
-  //     }
-  //   });
-
-  // }, [pagoId]);
-
   const getPago = (codigo) => {
     db.map((el) => {
       if (el.codigo == codigo) {
@@ -104,7 +91,7 @@ const Pagos = () => {
 
   return (
     <div>
-      <Row className="tablaPago" >
+      <Row className="tablaPago">
         <Col sm={4}>
           <BuscarPago
             createData={createData}
@@ -127,8 +114,11 @@ const Pagos = () => {
             <div style={{ display: diplayPagos }}>
               <CrudTable
                 data={db}
-                setDataToEdit={setDataToEdit}
-                deleteData={deleteData}
+                pagoModificado={pagoModificado}
+                setpagoModificado={setpagoModificado}
+                diplayPagos={diplayPagos}
+                setDiplayPagos={setDiplayPagos}
+                setDiplayBusqueda={setDiplayBusqueda}
               />
             </div>
           )}
@@ -149,8 +139,11 @@ const Pagos = () => {
                 <CrudTableRow
                   key={pagoId.id}
                   el={pagoId}
-                  setDataToEdit={setDataToEdit}
-                  deleteData={deleteData}
+                  pagoModificado={pagoModificado}
+                  setpagoModificado={setpagoModificado}
+                  diplayPagos={diplayPagos}
+                  setDiplayPagos={setDiplayPagos}
+                  setDiplayBusqueda={setDiplayBusqueda}
                 />
               </tbody>
             </table>

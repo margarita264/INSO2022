@@ -6,8 +6,6 @@ const initailForm = {
 };
 
 export const BuscarPago = ({
-  createData,
-  updateData,
   dataToEdit,
   setDataToEdit,
   getPago,
@@ -15,8 +13,6 @@ export const BuscarPago = ({
   setDiplayBusqueda,
 }) => {
   const [form, setForm] = useState(initailForm);
-  const [buscar, setBuscar] = useState(false);
-  const [pagoId, setPagoId] = useState({});
 
   useEffect(() => {
     if (dataToEdit) {
@@ -32,23 +28,6 @@ export const BuscarPago = ({
       [e.target.name]: e.target.value,
     });
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   if (!form.name) {
-  //     alert("No ingresó ningún código");
-  //     return;
-  //   }
-  //   console.log(form);
-  //   if (form.id === null) {
-  //     createData(form);
-  //   } else {
-  //     updateData(form);
-  //   }
-
-  //   handleReset();
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();

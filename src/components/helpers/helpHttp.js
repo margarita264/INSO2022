@@ -5,7 +5,7 @@ export const helpHttp = () => {
   const customFetch = (endpoint /* ruta*/, options) => {
     //metodo privado
     const defaultHeaders = {
-      //estas peticiones aceptas pjson
+      //estas peticiones aceptan pjson
       accept: "application/json",
     };
 

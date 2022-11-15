@@ -6,7 +6,7 @@ export const Estadisticas = () => {
     <div className='inicio'><img
     src={img}
     alt="random"
-    class="img-fluid"
+    className="img-fluid"
   /></div>
   )
 }
