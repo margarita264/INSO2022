@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { helpHttp } from "../components/helpers/helpHttp";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,6 +8,9 @@ import CrudTable from "../components/CrudTable";
 import Loader from "../components/loader/Loader";
 import Message from "../components/loader/Messaje";
 import CrudTableRow from "../components/CrudTableRow";
+import VistaComprobante from "../components/Comprobante/modal";
+import styled from "styled-components";
+import Comprobante from "../components/Comprobante/Comprobante";
 
 const Pagos = () => {
   const [db, setDb] = useState(null);
@@ -17,6 +21,8 @@ const Pagos = () => {
   const [pagoId, setPagoId] = useState({});
   const [diplayPagos, setDiplayPagos] = useState("block");
   const [diplayBusqueda, setDiplayBusqueda] = useState("none");
+  const [estadoModal1, cambiarEstadoModal1] = useState(false);
+  const [atualizarPago, seActualizarPago] = useState({});
 
   let api = helpHttp();
   let url = "http://localhost:3001/api/pagos/pendientes";
@@ -53,27 +59,56 @@ const Pagos = () => {
     });
   };
 
-  const deleteData = (id) => {
-    let isDelete = window.confirm(
-      `¿Esta seguro que desea cancelar el pago seleccionado?`
-    );
+  // const deleteData = (id) => {
+  //   let isDelete = window.confirm(
+  //     `¿Esta seguro que desea cancelar el pago seleccionado?`
+  //   );
 
-    if (isDelete) {
-      let endpoint = `${url}/${id}`;
+  //   if (isDelete) {
+  //     let endpoint = `${url}/${id}`;
+  //     let options = {
+  //       headers: { "content-type": "application/json" },
+  //     };
+
+  //     api.del(endpoint, options).then((res) => {
+  //       if (!res.err) {
+  //         let newData = db.filter((el) => el.id !== id);
+  //         setDb(newData);
+  //       } else {
+  //         setError(res);
+  //       }
+  //     });
+  //   } else {
+  //     return;
+  //   }
+  // };
+
+  const updatePago = (datos) => {
+    console.log("modificando pago");
+    if (window.confirm(`Se le enviará un correo al cliente`)) {
+      let endpoint = `http://localhost:3001/api/pagos/${datos.id}`;
+      const data = {
+        estado: "pagado",
+      };
       let options = {
+        body: data,
         headers: { "content-type": "application/json" },
       };
-
-      api.del(endpoint, options).then((res) => {
+      api.put(endpoint, options).then((res) => {
         if (!res.err) {
-          let newData = db.filter((el) => el.id !== id);
-          setDb(newData);
+          if (pagoModificado === false) {
+            setpagoModificado(true);
+          } else {
+            setpagoModificado(false);
+          }
         } else {
-          setError(res);
+          console.log("ocurrio un error: ", res);
         }
       });
-    } else {
-      return;
+    }
+    if (diplayPagos === "none") {
+      setDiplayBusqueda("none");
+      setDiplayPagos("block");
     }
   };
 
@@ -84,11 +119,10 @@ const Pagos = () => {
       }
     });
   };
-
-  useEffect(() => {
-    console.log(pagoId);
-  }, [pagoId]);
-
+  const confirmarPago = (atualizarPago) => {
+    updatePago(atualizarPago);
+    cambiarEstadoModal1(!estadoModal1);
+  };
   return (
     <div>
       <Row className="tablaPago">
@@ -119,6 +153,9 @@ const Pagos = () => {
                 diplayPagos={diplayPagos}
                 setDiplayPagos={setDiplayPagos}
                 setDiplayBusqueda={setDiplayBusqueda}
+                estadoModal1={estadoModal1}
+                cambiarEstadoModal1={cambiarEstadoModal1}
+                seActualizarPago={seActualizarPago}
               />
             </div>
           )}
@@ -144,14 +181,73 @@ const Pagos = () => {
                   diplayPagos={diplayPagos}
                   setDiplayPagos={setDiplayPagos}
                   setDiplayBusqueda={setDiplayBusqueda}
+                  estadoModal1={estadoModal1}
+                  cambiarEstadoModal1={cambiarEstadoModal1}
+                  seActualizarPago={seActualizarPago}
                 />
               </tbody>
             </table>
           </div>
         </Col>
+        <VistaComprobante
+          estado={estadoModal1}
+          cambiarEstado={cambiarEstadoModal1}
+          titulo={"Detalle de pago para enviar por mail"}
+        >
+          <Contenido>
+            <Comprobante
+              cliente={atualizarPago.cliente}
+              codigo={atualizarPago.codigo}
+              fecha={atualizarPago.fecha}
+              monto={atualizarPago.monto}
+            />
+            <Boton onClick={() => confirmarPago(atualizarPago)}>
+              Realizar Pago
+            </Boton>
+          </Contenido>
+        </VistaComprobante>
       </Row>
     </div>
   );
 };
 
 export default Pagos;
+
+const Boton = styled.button`
+  display: block;
+  text-align: center;
+  padding: 10px 10px;
+  width: 120px;
+  border-radius: 80px;
+  color: black;
+  border: none;
+  background: #e2d784;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  transition: 0.3s ease all;
+  &:hover {
+    background: #05595b;
+    color: #ffff;
+  }
+`;
+
+const Contenido = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  img {
+    width: 100%;
+    vertical-align: top;
+    border-radius: 3px;
+  }
+`;

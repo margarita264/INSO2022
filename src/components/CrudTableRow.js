@@ -1,47 +1,24 @@
 import React from "react";
-import { helpHttp } from "../components/helpers/helpHttp";
 import "./BuscarPago.css";
 
 const CrudTableRow = ({
   el,
-  pagoModificado,
-  setpagoModificado,
-  diplayPagos,
-  setDiplayPagos,
-  setDiplayBusqueda,
+  estadoModal1,
+  cambiarEstadoModal1,
+  seActualizarPago,
 }) => {
   let { cliente, codigo, monto, tipo, estado, vencimiento, id } = el;
-
-  let api = helpHttp();
-
-  const updatePago = (codigo, id) => {
-    console.log(codigo);
-    let isDelete = window.confirm(
-      `¿Esta seguro que desea cancelar el pago con código: ${codigo}?`
-    );
-    let endpoint = `http://localhost:3001/api/pagos/${id}`;
-    const data = {
-      estado: "pagado",
+  const pagoOp = (codigo, id) => {
+    cambiarEstadoModal1(!estadoModal1);
+    const fecha = new Date();
+    const datosPago = {
+      id: id,
+      codigo: codigo,
+      cliente: cliente,
+      monto: monto,
+      fecha: fecha.toLocaleDateString(),
     };
-    let options = {
-      body: data,
-      headers: { "content-type": "application/json" },
-    };
-    api.put(endpoint, options).then((res) => {
-      if (!res.err) {
-        if (pagoModificado === false) {
-          setpagoModificado(true);
-        } else {
-          setpagoModificado(false);
-        }
-      } else {
-        console.log("ocurrio un error: ", res);
-      }
-    });
-    if (diplayPagos === "none") {
-      setDiplayBusqueda("none");
-      setDiplayPagos("block");
-    }
+    seActualizarPago(datosPago);
   };
 
   const handleChange = () => {};
@@ -57,7 +34,10 @@ const CrudTableRow = ({
         <button className="editar" onClick={() => handleChange()}>
           Editar
         </button>
-        <button className="pagar" onClick={() => updatePago(codigo, id)}>
+        <button
+          className="pagar"
+          onClick={() => pagoOp(codigo, id, cliente, monto)}
+        >
           Pagar
         </button>
       </td>

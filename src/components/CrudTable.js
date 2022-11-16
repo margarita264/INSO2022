@@ -2,7 +2,14 @@ import React from "react";
 import CrudTableRow from "./CrudTableRow";
 import "./BuscarPago.css";
 
-const CrudTable = ({ data, pagoModificado, setpagoModificado }) => {
+const CrudTable = ({
+  data,
+  pagoModificado,
+  setpagoModificado,
+  estadoModal1,
+  cambiarEstadoModal1,
+  seActualizarPago
+}) => {
   return (
     <div>
       <h3>Pagos Pendientes</h3>
@@ -25,6 +32,9 @@ const CrudTable = ({ data, pagoModificado, setpagoModificado }) => {
                 el={el}
                 pagoModificado={pagoModificado}
                 setpagoModificado={setpagoModificado}
+                estadoModal1={estadoModal1}
+                cambiarEstadoModal1={cambiarEstadoModal1}
+                seActualizarPago={seActualizarPago}
               />
             ))
           ) : (
