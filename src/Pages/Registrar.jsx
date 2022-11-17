@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 import swal from 'sweetalert';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "./styles.css";
+import { Grid } from '@material-ui/core';
 
 export const Registrar = () => {
   const [datos, setDatos] = useState({
@@ -34,7 +38,6 @@ export const Registrar = () => {
       title: "Ingrese codigo de confirmacion:",
       content: "input",
       buttons: ["Cerrar", "Confirmar"],
-      //dangerMode: true,
     })
     .then((registro) => {
       if (registro) {
@@ -48,8 +51,10 @@ export const Registrar = () => {
    
   }
     return (
-      <main>
-      <form className="row" onSubmit={enviarDatos}>
+      <main style={{ display: 'block'}}>
+
+      <form className="row" onSubmit={enviarDatos} >
+      <h1>Registro Cliente</h1>
         <div className="col-md-3">
             <input 
             type="text" 
@@ -131,11 +136,14 @@ export const Registrar = () => {
             onChange={handleInputChange} 
             name="password"></input>
         </div>
-        <button onClick={()=> mostrarAlerta()}
-        type="submit" 
-        className="btn btn-primary">Registrar</button>
+        
       </form>
 
+      <Grid style={{ alignItems: 'center', justifyContent: 'center', marginLeft: '30em'}}>
+      <button onClick={()=> mostrarAlerta()} 
+        type="submit" 
+        className="btn btn-primary">Registrar</button>
+      </Grid>
       </main>
   )
     

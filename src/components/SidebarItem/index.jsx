@@ -10,6 +10,7 @@ const SidebarItem = ({ Icon, Text, Route }) => {
         <Icon />
         {Text}
       </Link>
+      
     </Container>
   );
 };

@@ -8,6 +8,7 @@ import {
   FaIdCardAlt,
   FaRegCalendarAlt,
   FaChartBar,
+  FaArrowLeft,
 } from "react-icons/fa";
 
 import SidebarItem from "../SidebarItem";
@@ -34,6 +35,7 @@ export const Sidebar = () => {
           Text="Registrar Asistencia"
           Route="/asistencia"
         />
+        <SidebarItem Icon={FaArrowLeft} Text="Salir" Route="/login"/>
       </Content>
     </Container>
   );

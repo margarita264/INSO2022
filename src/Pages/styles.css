@@ -138,3 +138,13 @@ footer {
 .inicio{
   padding-top: 60px;
 }
+
+/* -----------estilos de registro ----- */
+
+.col-md-3{
+  margin: 10px;
+}
+
+.btn{
+  width: 100px
+}
