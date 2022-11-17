@@ -8,7 +8,7 @@ import Estadisticas from "../../Pages/Estadisticas";
 import Home from "../../Pages/Home";
 import Pagos from "../../Pages/Pagos";
 import Registrar from "../../Pages/Registrar";
-import Login from "../../Pages/Login/Login";
+import Login from "../Login/Login";
 import Admin from "../../Pages/VistaAdmin";
 import Deporte from "../../Pages/Deporte";
 

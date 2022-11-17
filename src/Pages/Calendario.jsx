@@ -1,5 +1,6 @@
-import React from "react";
+
 import img from '../assets/calendario.PNG'
+
 
 export const Calendario = () => {
   return ( <div className='inicio'><img
@@ -8,4 +9,5 @@ export const Calendario = () => {
   className="img-fluid"
 /></div>);
 };
+
 export default Calendario;

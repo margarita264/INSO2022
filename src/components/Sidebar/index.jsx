@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Content } from "./styles";
-import { Link } from "react-router-dom";
 import {
   FaHome,
   FaEnvelope,
