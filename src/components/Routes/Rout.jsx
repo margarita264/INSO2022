@@ -8,12 +8,15 @@ import Estadisticas from "../../Pages/Estadisticas";
 import Home from "../../Pages/Home";
 import Pagos from "../../Pages/Pagos";
 import Registrar from "../../Pages/Registrar";
-import Login from "../Login/Login";
+import Login from "../../Pages/Login/Login";
+import Admin from "../../Pages/VistaAdmin";
 import Deporte from "../../Pages/Deporte";
 
 const Rout = () => {
   return (
     <Routes>
+      {/* <Route path="/home" element={<Home />} /> */}
+      {/* <Route path="/vistaAdmin" element={<Admin />} /> */}
       <Route path="/" element={<Home />} />
       <Route path="/registrar" element={<Registrar />} />
       <Route exact path="/calendario" element={<Calendario />} />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { helpHttp } from "../components/helpers/helpHttp";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,18 +8,28 @@ import CrudTable from "../components/CrudTable";
 import Loader from "../components/loader/Loader";
 import Message from "../components/loader/Messaje";
 import CrudTableRow from "../components/CrudTableRow";
+import VistaComprobante from "../components/Comprobante/modal";
+import styled from "styled-components";
+import Comprobante from "../components/Comprobante/Comprobante";
+import ComprobantePdf from "../components/Comprobante/ComprobantePdf";
+import {PDFViewer } from "@react-pdf/renderer";
 
 const Pagos = () => {
   const [db, setDb] = useState(null);
+  const [pagoModificado, setpagoModificado] = useState(false);
   const [dataToEdit, setDataToEdit] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [pagoId, setPagoId] = useState({});
   const [diplayPagos, setDiplayPagos] = useState("block");
   const [diplayBusqueda, setDiplayBusqueda] = useState("none");
+  const [estadoModal1, cambiarEstadoModal1] = useState(false);
+  const [atualizarPago, seActualizarPago] = useState({});
+  const [verPdf, setVerPdf] = useState(true);
+  const [bontonComprobante, setBontonComprobante] = useState("Ver pdf");
 
   let api = helpHttp();
-  let url = "http://localhost:5000/pagos";
+  let url = "http://localhost:3001/api/pagos/pendientes";
 
   useEffect(() => {
     setLoading(true);
@@ -26,7 +37,8 @@ const Pagos = () => {
       .get(url)
       .then((res) => {
         if (!res.err) {
-          setDb(res);
+          setDb(res.listaPagos);
+          console.log(res.listaPagos);
           setError(null);
         } else {
           setDb(null);
@@ -34,7 +46,8 @@ const Pagos = () => {
         }
         setLoading(false);
       });
-  }, [url]);
+  }, [url, pagoModificado]);
+
   const createData = (data) => {
     data.id = Date.now();
     let options = {
@@ -51,44 +64,34 @@ const Pagos = () => {
     });
   };
 
-  const deleteData = (id) => {
-    let isDelete = window.confirm(
-      `¿Esta seguro que desea cancelar el pago seleccionado?`
-    );
-
-    if (isDelete) {
-      let endpoint = `${url}/${id}`;
+  const updatePago = (datos) => {
+    console.log("modificando pago");
+    if (window.confirm(`Se le enviará un correo al cliente`)) {
+      let endpoint = `http://localhost:3001/api/pagos/${datos.id}`;
+      const data = {
+        estado: "pagado",
+      };
       let options = {
+        body: data,
         headers: { "content-type": "application/json" },
       };
-
-      api.del(endpoint, options).then((res) => {
+      api.put(endpoint, options).then((res) => {
         if (!res.err) {
-          let newData = db.filter((el) => el.id !== id);
-          setDb(newData);
+          if (pagoModificado === false) {
+            setpagoModificado(true);
+          } else {
+            setpagoModificado(false);
+          }
         } else {
-          setError(res);
+          console.log("ocurrio un error: ", res);
         }
       });
-    } else {
-      return;
+    }
+    if (diplayPagos === "none") {
+      setDiplayBusqueda("none");
+      setDiplayPagos("block");
     }
   };
-
-  // useEffect(() => {
-  //   let endpoint = `${url}/${pagoId}`;
-  //   let options = {
-  //     headers: { "content-type": "application/json" },
-  //   };
-  //   api.get(endpoint, options).then((res) => {
-  //     if (!res.err) {
-  //       setPago(res);
-  //     } else {
-  //       setError(res);
-  //     }
-  //   });
-
-  // }, [pagoId]);
 
   const getPago = (codigo) => {
     db.map((el) => {
@@ -97,14 +100,24 @@ const Pagos = () => {
       }
     });
   };
-
+  const confirmarPago = (atualizarPago) => {
+    updatePago(atualizarPago);
+    cambiarEstadoModal1(!estadoModal1);
+  };
+  const CCC = () => {
+    if (bontonComprobante === "Ver pdf") {
+      setBontonComprobante("cerrar pdf");
+    } else {
+      setBontonComprobante("Ver pdf");
+    }
+  };
   useEffect(() => {
-    console.log(pagoId);
-  }, [pagoId]);
+    setVerPdf(!verPdf);
+  }, [bontonComprobante]);
 
   return (
     <div>
-      <Row className="tablaPago" >
+      <Row className="tablaPago">
         <Col sm={4}>
           <BuscarPago
             createData={createData}
@@ -127,8 +140,14 @@ const Pagos = () => {
             <div style={{ display: diplayPagos }}>
               <CrudTable
                 data={db}
-                setDataToEdit={setDataToEdit}
-                deleteData={deleteData}
+                pagoModificado={pagoModificado}
+                setpagoModificado={setpagoModificado}
+                diplayPagos={diplayPagos}
+                setDiplayPagos={setDiplayPagos}
+                setDiplayBusqueda={setDiplayBusqueda}
+                estadoModal1={estadoModal1}
+                cambiarEstadoModal1={cambiarEstadoModal1}
+                seActualizarPago={seActualizarPago}
               />
             </div>
           )}
@@ -149,16 +168,93 @@ const Pagos = () => {
                 <CrudTableRow
                   key={pagoId.id}
                   el={pagoId}
-                  setDataToEdit={setDataToEdit}
-                  deleteData={deleteData}
+                  pagoModificado={pagoModificado}
+                  setpagoModificado={setpagoModificado}
+                  diplayPagos={diplayPagos}
+                  setDiplayPagos={setDiplayPagos}
+                  setDiplayBusqueda={setDiplayBusqueda}
+                  estadoModal1={estadoModal1}
+                  cambiarEstadoModal1={cambiarEstadoModal1}
+                  seActualizarPago={seActualizarPago}
                 />
               </tbody>
             </table>
           </div>
         </Col>
+        <VistaComprobante
+          estado={estadoModal1}
+          cambiarEstado={cambiarEstadoModal1}
+          titulo={"Detalle de pago para enviar por mail"}
+          verPdf={verPdf}
+        >
+          <Contenido>
+            {verPdf ? (
+              <PDFViewer style={{ width: "83%", height: "50vh" }}>
+                <ComprobantePdf
+                  cliente={atualizarPago.cliente}
+                  codigo={atualizarPago.codigo}
+                  fecha={atualizarPago.fecha}
+                  monto={atualizarPago.monto}
+                />
+              </PDFViewer>
+            ) : (
+              <Comprobante
+                cliente={atualizarPago.cliente}
+                codigo={atualizarPago.codigo}
+                fecha={atualizarPago.fecha}
+                monto={atualizarPago.monto}
+              />
+            )}
+            <div className="btn-group">
+              <Boton onClick={() => confirmarPago(atualizarPago)}>
+                Realizar Pago
+              </Boton>
+              <Boton onClick={() => CCC()}>{bontonComprobante}</Boton>
+            </div>
+          </Contenido>
+        </VistaComprobante>
       </Row>
     </div>
   );
 };
 
 export default Pagos;
+
+const Boton = styled.button`
+  text-align: center;
+  padding: 10px 10px;
+  width: 120px;
+  border-radius: 80px;
+  color: black;
+  border: none;
+  background: #e2d784;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  transition: 0.3s ease all;
+  display: inline-block;
+  &:hover {
+    background: #05595b;
+    color: #ffff;
+  }
+`;
+
+const Contenido = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  img {
+    width: 100%;
+    vertical-align: top;
+    border-radius: 3px;
+  }
+`;

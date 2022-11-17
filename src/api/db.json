@@ -1,33 +1,6 @@
 {
   "pagos": [
     {
-      "id": 123,
-      "cliente": "Carlos Alvarado",
-      "codigo": "0002",
-      "monto": "3500",
-      "tipo": "efectivo",
-      "estado": "pendiente",
-      "vencimiento": "20/10/2020"
-    },
-    {
-      "id": 456,
-      "cliente": "Luis",
-      "codigo": "0003",
-      "monto": "2500",
-      "tipo": "efectivo",
-      "estado": "pendiente",
-      "vencimiento": "5/10/2020"
-    },
-    {
-      "id": 321,
-      "cliente": "Pepe Sand",
-      "codigo": "0004",
-      "monto": "4000",
-      "tipo": "efectivo",
-      "estado": "pendiente",
-      "vencimiento": "4/10/2020"
-    },
-    {
       "id": 654,
       "cliente": "Max Steel",
       "codigo": "0005",
@@ -51,7 +24,7 @@
       "nombre": "Carlos Alvarado",
       "actividad": "GIM",
       "img": "https://randomuser.me/api/portraits/med/men/1.jpg",
-      "estado_pago": "pendiente",
+      "estado_pago": "pagado",
       "id": 123
     },
     {
@@ -66,7 +39,6 @@
       "actividad": "GIM",
       "img": "https://randomuser.me/api/portraits/med/men/3.jpg",
       "estado_pago": "pagado",
-      "monto": 0,
       "id": 321
     },
     {
@@ -104,6 +76,57 @@
       "actividad": "GIM",
       "fecha": "3/10/2022, 19:31:19",
       "id": 1664836287767
+    },
+    {
+      "nombre": "Max Steel",
+      "actividad": "GIM",
+      "fecha": "13/11/2022, 17:44:43",
+      "id": 1668372298071
+    },
+    {
+      "fecha": "13/11/2022, 17:49:09",
+      "id": 1668372553349
+    },
+    {
+      "fecha": "13/11/2022, 19:17:37",
+      "id": 1668377861494
+    },
+    {
+      "fecha": "13/11/2022, 19:18:53",
+      "id": 1668377936455
+    },
+    {
+      "fecha": "13/11/2022, 19:20:13",
+      "id": 1668378018363
+    },
+    {
+      "fecha": "13/11/2022, 19:22:26",
+      "id": 1668378149009
+    },
+    {
+      "fecha": "13/11/2022, 19:31:19",
+      "id": 1668378684586
+    },
+    {
+      "id": 1668388358120
+    },
+    {
+      "fecha": "13/11/2022, 22:18:14",
+      "id": 1668388755160
+    },
+    {
+      "fecha": "13/11/2022, 22:21:17",
+      "id": 1668388881660
+    },
+    {
+      "fecha": "13/11/2022, 22:23:20",
+      "id": 1668389004749
+    },
+    {
+      "nombre": "marga",
+      "actividad": "Body balance",
+      "fecha": "13/11/2022, 22:24:42",
+      "id": 1668389176055
     }
   ]
 }
