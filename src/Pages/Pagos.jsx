@@ -11,6 +11,8 @@ import CrudTableRow from "../components/CrudTableRow";
 import VistaComprobante from "../components/Comprobante/modal";
 import styled from "styled-components";
 import Comprobante from "../components/Comprobante/Comprobante";
+import ComprobantePdf from "../components/Comprobante/ComprobantePdf";
+import {PDFViewer } from "@react-pdf/renderer";
 
 const Pagos = () => {
   const [db, setDb] = useState(null);
@@ -23,6 +25,8 @@ const Pagos = () => {
   const [diplayBusqueda, setDiplayBusqueda] = useState("none");
   const [estadoModal1, cambiarEstadoModal1] = useState(false);
   const [atualizarPago, seActualizarPago] = useState({});
+  const [verPdf, setVerPdf] = useState(true);
+  const [bontonComprobante, setBontonComprobante] = useState("Ver pdf");
 
   let api = helpHttp();
   let url = "http://localhost:3001/api/pagos/pendientes";
@@ -43,6 +47,7 @@ const Pagos = () => {
         setLoading(false);
       });
   }, [url, pagoModificado]);
+
   const createData = (data) => {
     data.id = Date.now();
     let options = {
@@ -58,30 +63,6 @@ const Pagos = () => {
       }
     });
   };
-
-  // const deleteData = (id) => {
-  //   let isDelete = window.confirm(
-  //     `¿Esta seguro que desea cancelar el pago seleccionado?`
-  //   );
-
-  //   if (isDelete) {
-  //     let endpoint = `${url}/${id}`;
-  //     let options = {
-  //       headers: { "content-type": "application/json" },
-  //     };
-
-  //     api.del(endpoint, options).then((res) => {
-  //       if (!res.err) {
-  //         let newData = db.filter((el) => el.id !== id);
-  //         setDb(newData);
-  //       } else {
-  //         setError(res);
-  //       }
-  //     });
-  //   } else {
-  //     return;
-  //   }
-  // };
 
   const updatePago = (datos) => {
     console.log("modificando pago");
@@ -123,6 +104,17 @@ const Pagos = () => {
     updatePago(atualizarPago);
     cambiarEstadoModal1(!estadoModal1);
   };
+  const CCC = () => {
+    if (bontonComprobante === "Ver pdf") {
+      setBontonComprobante("cerrar pdf");
+    } else {
+      setBontonComprobante("Ver pdf");
+    }
+  };
+  useEffect(() => {
+    setVerPdf(!verPdf);
+  }, [bontonComprobante]);
+
   return (
     <div>
       <Row className="tablaPago">
@@ -193,17 +185,32 @@ const Pagos = () => {
           estado={estadoModal1}
           cambiarEstado={cambiarEstadoModal1}
           titulo={"Detalle de pago para enviar por mail"}
+          verPdf={verPdf}
         >
           <Contenido>
-            <Comprobante
-              cliente={atualizarPago.cliente}
-              codigo={atualizarPago.codigo}
-              fecha={atualizarPago.fecha}
-              monto={atualizarPago.monto}
-            />
-            <Boton onClick={() => confirmarPago(atualizarPago)}>
-              Realizar Pago
-            </Boton>
+            {verPdf ? (
+              <PDFViewer style={{ width: "83%", height: "50vh" }}>
+                <ComprobantePdf
+                  cliente={atualizarPago.cliente}
+                  codigo={atualizarPago.codigo}
+                  fecha={atualizarPago.fecha}
+                  monto={atualizarPago.monto}
+                />
+              </PDFViewer>
+            ) : (
+              <Comprobante
+                cliente={atualizarPago.cliente}
+                codigo={atualizarPago.codigo}
+                fecha={atualizarPago.fecha}
+                monto={atualizarPago.monto}
+              />
+            )}
+            <div className="btn-group">
+              <Boton onClick={() => confirmarPago(atualizarPago)}>
+                Realizar Pago
+              </Boton>
+              <Boton onClick={() => CCC()}>{bontonComprobante}</Boton>
+            </div>
           </Contenido>
         </VistaComprobante>
       </Row>
@@ -214,7 +221,6 @@ const Pagos = () => {
 export default Pagos;
 
 const Boton = styled.button`
-  display: block;
   text-align: center;
   padding: 10px 10px;
   width: 120px;
@@ -226,6 +232,7 @@ const Boton = styled.button`
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   transition: 0.3s ease all;
+  display: inline-block;
   &:hover {
     background: #05595b;
     color: #ffff;
